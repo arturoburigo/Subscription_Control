@@ -3,7 +3,7 @@ import { GetSubscriptionByUserService } from "../../services/subcription/GetSubs
 
 class GetSubscriptionbyUserController {
   async handle(request: Request, response: Response) {
-    const user_id = request?.query.user_id as string;
+    const user_id = request.user_id;
 
     const getSubscriptionbyUserService = new GetSubscriptionByUserService();
 
