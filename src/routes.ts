@@ -11,6 +11,8 @@ import { FindUserByIdController } from "./controllers/user/FindUserByIdControlle
 //subscription imports
 import { CreateSubscriptionController } from "./controllers/subscription/CreateSubscriptionController";
 import { GetSubscriptionbyUserController } from "./controllers/subscription/GetSubscriptionByUserController";
+import { DeleteSubscriptionController } from "./controllers/subscription/DeleteSubscriptionController";
+import { EditSubscriptionController } from "./controllers/subscription/EditSubscriptionController";
 
 const router = Router();
 
@@ -30,6 +32,18 @@ router.get(
   "/subscription/id",
   isAuthenticated,
   new GetSubscriptionbyUserController().handle,
+);
+
+router.delete(
+  "/subscription/delete",
+  isAuthenticated,
+  new DeleteSubscriptionController().handle,
+);
+
+router.put(
+  "/subscription/update",
+  isAuthenticated,
+  new EditSubscriptionController().handle,
 );
 
 export { router };
