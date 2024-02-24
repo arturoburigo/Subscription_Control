@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { FindUserByIdService } from "../services/user/FindUserByIdService";
+import { FindUserByIdService } from "../../services/user/FindUserByIdService";
 
 class FindUserByIdController {
   async handle(request: Request, response: Response) {
