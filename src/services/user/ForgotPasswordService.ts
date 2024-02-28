@@ -11,8 +11,8 @@ const transporter = createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: "burigoarturo3@gmail.com",
-    pass: "swgn eaor clbt zbew",
+    user: process.env.EMAIL_ADDRESS,
+    pass: process.env.EMAIL_PASSWORD,
   },
 });
 
