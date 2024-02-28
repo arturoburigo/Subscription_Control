@@ -2,34 +2,34 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-  provider = "prisma-client-js"
+    provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
-  url      = env("DATABASE_URL")
+    provider = "mongodb"
+    url      = env("DATABASE_URL")
 }
 
 model User {
-  id        String       @id @default(uuid())
-  email     String       @unique
-  name      String
-  password  String
-  subscriptions Subscription[]
-  created_at DateTime     @default(now())
-  updated_at DateTime     @default(now())
+    id            String         @id @default(auto()) @map("_id") @db.ObjectId
+    email         String         @unique
+    name          String
+    password      String
+    subscriptions Subscription[]
+    created_at    DateTime       @default(now())
+    updated_at    DateTime       @default(now())
 }
 
 model Subscription {
-  id                  String    @id @default(uuid())
-  name                String
-  renewal_dayOf_Month Int
-  price               Float
-  status              Boolean   @default(true)
-  user                User?     @relation(fields: [userId], references: [id])
-  userId              String?
-  created_at          DateTime  @default(now())
-  updated_at          DateTime  @default(now())
+    id                  String   @id @default(auto()) @map("_id") @db.ObjectId
+    name                String
+    renewal_dayOf_Month Int
+    price               Float
+    status              Boolean  @default(true)
+    user                User?    @relation(fields: [userId], references: [id])
+    userId              String   @db.ObjectId // Adicionando @db.ObjectId aqui
+    created_at          DateTime @default(now())
+    updated_at          DateTime @default(now())
 
-  @@index([userId], name: "subscription_userId_index")
+    @@index([userId], name: "subscription_userId_index")
 }

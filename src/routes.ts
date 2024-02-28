@@ -13,14 +13,18 @@ import { CreateSubscriptionController } from "./controllers/subscription/CreateS
 import { GetSubscriptionbyUserController } from "./controllers/subscription/GetSubscriptionByUserController";
 import { DeleteSubscriptionController } from "./controllers/subscription/DeleteSubscriptionController";
 import { EditSubscriptionController } from "./controllers/subscription/EditSubscriptionController";
+import { GetTotalSubscriptionPriceByIdController } from "./controllers/subscription/GetTotalSubscriptionPriceByIdController";
+import { ForgotPasswordController } from "./controllers/user/ForgotPasswordController";
+import { ResetPasswordController } from "./controllers/user/ResetPasswordController";
 
 const router = Router();
 
 router.post("/user", new CreateUserController().handle);
 router.post("/signin", new AuthUserController().handle);
+router.post("/forgotpassword", new ForgotPasswordController().handle);
 router.delete("/user", isAuthenticated, new DeleteUserController().handle);
 router.get("/user/id", isAuthenticated, new FindUserByIdController().handle);
-
+router.post("/resetpassword", new ResetPasswordController().handle);
 // Subscriptions
 router.post(
   "/subscription",
@@ -44,6 +48,12 @@ router.put(
   "/subscription/update",
   isAuthenticated,
   new EditSubscriptionController().handle,
+);
+
+router.get(
+  "/subscription/total-price",
+  isAuthenticated,
+  new GetTotalSubscriptionPriceByIdController().handle,
 );
 
 export { router };
